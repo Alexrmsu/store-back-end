@@ -9,9 +9,5 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+module.exports = app;
 
-// routes
-
-app.use(require('./api/controllers/products'));
-
-app.use(require('./api/controllers/users'));
