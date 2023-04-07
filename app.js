@@ -8,3 +8,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors());
+
+
+// routes
+
+app.use(require('./api/controllers/products'));
+
+app.use(require('./api/controllers/users'));
