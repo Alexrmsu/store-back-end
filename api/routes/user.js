@@ -7,13 +7,13 @@ const  verifyToken  = require('../routes/jwt-valid');
 
 
 router.post('/login', (req, res) => {
-    const { email, pass } = req.body;
-    connection.query('select user.email, rol.nombreRol as \'rol\', user.userId from user left join rol on rol.idRol = user.rolId where email=? and pass=?',
-        [email, pass], (err, rows, fields) => {
+    const { email, password } = req.body;
+    connection.query(' select * from users where email = ? and password = ? ',
+        [email, password], (err, rows, fields) => {
             if (!err) {
                 if (rows.length > 0) {
                     const data = Object.assign({}, rows[0]);
-                    const token = jwt.sign(data, "secret",{expiresIn: '1h'});
+                    const token = jwt.sign(data, "secret",{expiresIn: '2h'});
                     return res.json({token});
                 }
                 else {
