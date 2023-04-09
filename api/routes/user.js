@@ -8,7 +8,7 @@ const  verifyToken  = require('../routes/jwt-valid');
 
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
-    connection.query(' select * from users where email = ? and password = ? ',
+    connection.query(' select * from user where email = ? and password = ? ',
         [email, password], (err, rows, fields) => {
             if (!err) {
                 if (rows.length > 0) {
@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
 
 
 router.post('/register', verifyToken, (req, res) => {
-    connection.query('SELECT * FROM users WHERE email = ?', [req.body.email], (err, result) => {
+    connection.query('SELECT * FROM user WHERE email = ?', [req.body.email], (err, result) => {
         if (err) {
             console.log(err);
             return;
