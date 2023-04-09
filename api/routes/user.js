@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const connection = require('connection/connection.js');
+const connection = require('../../connection/connection');
 const jwt = require('jsonwebtoken');
-const verifyToken  = require('/api/routes/jwt-valid.js');
+const  verifyToken  = require('../routes/jwt-valid');
 
 
 
