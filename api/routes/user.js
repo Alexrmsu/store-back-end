@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../connection/connection');
 const jwt = require('jsonwebtoken');
-const  verifyToken  = require('../routes/jwt-valid');
+const verifyToken  = require('../routes/jwt-valid');
 
 
 
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
-    connection.query(' select * from user where email = ? and password = ? ',
+    connection.query(' select email, rol from user where email = ? and password = ? ',
         [email, password], (err, rows, fields) => {
             if (!err) {
                 if (rows.length > 0) {
