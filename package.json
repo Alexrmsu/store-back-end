@@ -1,6 +1,6 @@
 {
   "name": "store-back-end",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Node.JS backend of the Angular store app",
   "main": "index.js",
   "scripts": {
