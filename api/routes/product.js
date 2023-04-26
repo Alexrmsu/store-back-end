@@ -40,6 +40,16 @@ router.get('/all', (req, res) => {
     })
 })
 
+router.delete('/delete/:id', verifyToken, (req, res) => {
+    connection.query('DELETE FROM products WHERE id = ?', [req.params.id], (err, rows, fields) => {
+        if (!err) {
+            res.json({ status: 'Product deleted' });
+        } else {
+            console.log(err);
+        }
+    })
+})
+
 
 
 module.exports = router;
