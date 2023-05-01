@@ -29,6 +29,20 @@ router.post('/add' , verifyToken, (req, res) => {
     })
 })
 
+router.put('/update/:id', verifyToken, (req, res) => {
+    const { name, description, price } = req.body;
+    const { id } = req.params;
+    connection.query('UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?',
+        [name, description, price, id], (err, rows, fields) => {
+            if (!err) {
+                res.json({ status: 'Product updated' });
+            } else {
+                console.log(err);
+            }
+        })
+})
+
+
 
 router.get('/all', (req, res) => {
     connection.query('SELECT * FROM products', (err, rows, fields) => {
