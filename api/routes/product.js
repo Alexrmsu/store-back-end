@@ -17,16 +17,12 @@ const storage = multer.diskStorage({
     }
 })
 
-const upload = multer({ storage: storage })
-
-router.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ status: 'Image uploaded' });
-})
+const upload = multer({ storage: storage });
 
 router.get('/image/:name', (req, res) => {
 
 const name = req.params.name;
-    const path = '../../img/' + name;
+    const path = './img/' + name;
     fs.readFile(path, function (err, data) {
         if (err) {
             console.log(err);
@@ -51,10 +47,13 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/upload', upload.single('file'), (req, res) => {
+    res.json({ status: 'Image uploaded' });
+})
 
 router.post('/add' , verifyToken, (req, res) => {
-    const {id, name, description, price, image } = req.body;
-    connection.query('INSERT INTO products SET ?', { id, name, description, price, image }, (err, rows, fields) => {
+    const {id, name, description, image, price } = req.body;
+    connection.query('INSERT INTO products SET ?', { id, name, description, image, price }, (err, rows, fields) => {
         if (!err) {
             res.json({ status: 'Product saved' });
         } else {
