@@ -4,7 +4,9 @@ create database if not exists store;
 
 use store;
 
-create table products (id int, name varchar(255), price int, quantity int, image blob);
+create table products (id int, name varchar(255), price int, quantity int, image varchar(255));
+
+drop table products;
 
 create table user (id int, rol varchar(255), name varchar(255), email varchar(255), password varchar(255));
 

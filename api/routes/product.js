@@ -7,6 +7,40 @@ const fs = require("fs");
 const multer = require('multer');
 
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '../../img')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+
+    }
+})
+
+const upload = multer({ storage: storage })
+
+router.post('/upload', upload.single('file'), (req, res) => {
+    res.json({ status: 'Image uploaded' });
+})
+
+router.get('/image/:name', (req, res) => {
+
+const name = req.params.name;
+    const path = '../../img/' + name;
+    fs.readFile(path, function (err, data) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'image/png' });
+        res.end(data);
+    });
+})
+
+
+
+
+
 router.get('/', (req, res) => {
     connection.query('SELECT * FROM products', (err, rows, fields) => {
         if (!err) {
