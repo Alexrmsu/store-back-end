@@ -4,7 +4,7 @@ create database if not exists store;
 
 use store;
 
-create table products (id int, name varchar(255), description varchar(255), image varchar(255), price int);
+create table products (id int AUTO_INCREMENT primary key NOT NULL, name varchar(255), description varchar(255), image varchar(255), price int);
 
 drop table products;
 
