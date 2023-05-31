@@ -47,9 +47,6 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ status: 'Image uploaded' });
-})
 
 router.post('/add' , verifyToken, (req, res) => {
     const {id, name, description, image, price } = req.body;
