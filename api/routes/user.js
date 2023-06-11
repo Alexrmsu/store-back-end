@@ -2,28 +2,25 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../connection/connection');
 const jwt = require('jsonwebtoken');
-const verifyToken  = require('../routes/jwt-valid');
-
+const verifyToken = require('../routes/jwt-valid');
 
 
 router.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const {email, password} = req.body;
     connection.query(' select email, rol from user where email = ? and password = ? ',
         [email, password], (err, rows, fields) => {
             if (!err) {
                 if (rows.length > 0) {
                     const data = Object.assign({}, rows[0]);
-                    const token = jwt.sign(data, "secret",{expiresIn: '2h'});
+                    const token = jwt.sign(data, "secret", {expiresIn: '2h'});
                     return res.json({token});
-                }
-                else {
-                    return res.json({ status: 'Usuario o contraseña incorrectos' });
+                } else {
+                    return res.json({status: 'Usuario o contraseña incorrectos'});
                 }
             } else {
                 console.log(err);
             }
         }
-
     )
 
 })
@@ -51,7 +48,6 @@ router.post('/register', verifyToken, (req, res) => {
         })
     })
 })
-
 
 
 module.exports = router;

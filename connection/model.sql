@@ -1,5 +1,3 @@
-
-
 create database if not exists store;
 
 use store;
